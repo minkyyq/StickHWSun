@@ -1,0 +1,10 @@
+name: StickHWSun
+version: '${version}'
+main: stickdev.tun1x.StickHWSun
+api-version: '1.16'
+website: https://t.me/stickdev
+depend:
+  - Vault
+
+permissions:
+  stickhwsun.admin:
