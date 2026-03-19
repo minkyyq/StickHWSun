@@ -1,0 +1,37 @@
+language: "ru"
+
+location:
+  world-name: "spawn"
+  coord-x: -121
+  coord-y: 48
+  coord-z: -28
+  area-size: 15 # радиус, при котором игроки будут получвть награды
+
+distribution:
+  tick-interval: 5 # интервал выдачи наград в секундах (если игрок стоит в радиусе указанном в конфиге то каждые X секунд выдается награда: опыт или монетки)
+  currency-lower: 8500 # минимальное количество выдачи монет в радиусе
+  currency-upper: 9700 # максимальное количество выдачи монет в радуисе
+  experience-lower: 20 # минимальное количество выдачи опыта в радиусе
+  experience-upper: 40 # максимальное количество выдачи опыта в радиусе
+
+rotation:
+  switch-period: 25 # время смены фазы (exp/money) в минутах
+
+spawner:
+  spawn-cooldown: 20 # интервал дропа предметов в секундах
+  internal:
+    amount: 1 # колво предметов за раз
+
+visual:
+  header-text: "&6Ядро солнца"
+  status-text: "&fСейчас выдаёт %cycle%"
+  countdown-text: "&fЛут через &x&0&0&D&0&F&8%time% сек."
+  vertical-shift: 1.4 # высота голограммы над ядром
+
+cycles:
+  money:
+    display: "&#FFD700Монеты"
+    reward: "&#FFD700монеты"
+  xp:
+    display: "&#00FF00Опыт"
+    reward: "&#00FF00опыт"
