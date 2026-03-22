@@ -4,28 +4,41 @@ plugins {
 }
 
 group = 'ru.stickdev'
-version = '1.0'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
     maven { url = 'https://repo.papermc.io/repository/maven-public/' }
     maven { url = 'https://repo.panda-lang.org/releases' }
     maven { url = 'https://jitpack.io' }
+    maven { url = "https://repo.codemc.io/repository/maven-public/" }
 }
 
 dependencies {
-    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
-    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
-    
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    
-    implementation 'dev.rollczi:litecommands-bukkit:3.4.2'
-    implementation 'net.kyori:adventure-text-minimessage:4.14.0'
-    implementation 'net.kyori:adventure-platform-bukkit:4.3.0'
+    // Paper
+    compileOnly(libs.paper)
+
+    // Vault
+    compileOnly(libs.vaultapi)
+
+    // DecentHolograms
+    compileOnly(libs.decentHolograms)
+
+    // Lombok
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
+
+    // LiteCommands
+    implementation(libs.litecommands)
+
+    // MiniMessage
+    implementation(libs.minimessage)
+
+    // adventure bukkit
+    implementation(libs.adventureBukkit)
 }
 
-def targetJavaVersion = 8
+def targetJavaVersion = 16
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -53,7 +66,7 @@ processResources {
 }
 
 shadowJar {
-    archiveClassifier.set('')
+    archiveClassifier.set('en')
     
     relocate 'dev.rollczi.litecommands', 'stickdev.tun1x.libs.litecommands'
     relocate 'net.kyori', 'stickdev.tun1x.libs.kyori'

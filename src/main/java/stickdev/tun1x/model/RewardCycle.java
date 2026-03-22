@@ -9,33 +9,19 @@ public enum RewardCycle {
     XP;
 
     public String getDisplay() {
-        return getConfig(this == MONEY ? "money.display" : "xp.display");
+        return this == MONEY
+                ? TextUtil.color(StickHWSun.inst().getSettings().getCycles().getMoneyDisplayColor())
+                : TextUtil.color(StickHWSun.inst().getSettings().getCycles().getXpDisplayColor());
     }
 
     public String getReward() {
-        return TextUtil.color(getConfig(this == MONEY ? "money.reward" : "xp.reward"));
-    }
-
-    private String getConfig(String path) {
-        if (this == MONEY) {
-            return path.contains("display") 
-                ? StickHWSun.inst().getSettings().getMoneyDisplayColor()
-                : StickHWSun.inst().getSettings().getMoneyRewardColor();
-        } else {
-            return path.contains("display")
-                ? StickHWSun.inst().getSettings().getXpDisplayColor()
-                : StickHWSun.inst().getSettings().getXpRewardColor();
-        }
+        return this == MONEY
+                ? TextUtil.color(StickHWSun.inst().getSettings().getCycles().getMoneyRewardColor())
+                : TextUtil.color(StickHWSun.inst().getSettings().getCycles().getXpRewardColor());
     }
 
     public RewardCycle shift() {
-        switch (this) {
-            case MONEY:
-                return XP;
-            case XP:
-                return MONEY;
-            default:
-                return MONEY;
-        }
+        if (this == RewardCycle.MONEY) return XP;
+        return MONEY;
     }
 }

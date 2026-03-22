@@ -1,0 +1,17 @@
+[versions]
+paper = "1.16.5-R0.1-SNAPSHOT"
+vaultapi = "1.7"
+lombok = "1.18.30"
+litecommands = "3.10.8"
+minimessage = "4.14.0"
+adventureBukkit = "4.3.0"
+decentHolograms = "2.8.2"
+
+[libraries]
+paper = { module = "com.destroystokyo.paper:paper-api", version.ref = "paper" }
+vaultapi = { module = "com.github.MilkBowl:VaultAPI", version.ref = "vaultapi" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+litecommands = { module = "dev.rollczi:litecommands-bukkit", version.ref = "litecommands" }
+minimessage = { module = "net.kyori:adventure-text-minimessage", version.ref = "minimessage" }
+adventureBukkit = { module = "net.kyori:adventure-platform-bukkit", version.ref = "adventureBukkit" }
+decentHolograms = { module = "com.github.decentsoftware-eu:decentholograms", version.ref = "decentHolograms" }

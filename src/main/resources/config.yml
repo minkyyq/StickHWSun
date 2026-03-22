@@ -1,37 +1,38 @@
-language: "ru"
+language: "en"
 
 location:
   world-name: "spawn"
   coord-x: -121
   coord-y: 48
   coord-z: -28
-  area-size: 15 # радиус, при котором игроки будут получвть награды
+  area-size: 15 # radius within which players will receive rewards
 
 distribution:
-  tick-interval: 5 # интервал выдачи наград в секундах (если игрок стоит в радиусе указанном в конфиге то каждые X секунд выдается награда: опыт или монетки)
-  currency-lower: 8500 # минимальное количество выдачи монет в радиусе
-  currency-upper: 9700 # максимальное количество выдачи монет в радуисе
-  experience-lower: 20 # минимальное количество выдачи опыта в радиусе
-  experience-upper: 40 # максимальное количество выдачи опыта в радиусе
+  tick-interval: 5 # reward interval in seconds (if a player stands within the radius specified in the config, a reward is given every X seconds: experience or coins)
+  currency-lower: 8500 # minimum amount of coins given within the radius
+  currency-upper: 9700 # maximum amount of coins given within the radius
+  experience-lower: 20 # minimum amount of experience given within the radius
+  experience-upper: 40 # maximum amount of experience given within the radius
 
 rotation:
-  switch-period: 25 # время смены фазы (exp/money) в минутах
+  switch-period: 25 # time between phase switches (exp/money) in minutes
 
 spawner:
-  spawn-cooldown: 20 # интервал дропа предметов в секундах
+  spawn-cooldown: 20 # item drop interval in seconds
   internal:
-    amount: 1 # колво предметов за раз
+    amount: 1 # number of items dropped at once
 
-visual:
-  header-text: "&6Ядро солнца"
-  status-text: "&fСейчас выдаёт %cycle%"
-  countdown-text: "&fЛут через &x&0&0&D&0&F&8%time% сек."
-  vertical-shift: 1.4 # высота голограммы над ядром
+hologram:
+  lines:
+    - "&6Sun Core"
+    - "&fCurrently giving %cycle%"
+    - "&fLoot in &x&0&0&D&0&F&8%time% sec."
+  vertical-shift: 1.4 # hologram height above the core
 
 cycles:
   money:
-    display: "&#FFD700Монеты"
-    reward: "&#FFD700монеты"
+    display: "&#FFD700Coins"
+    reward: "&#FFD700coins"
   xp:
-    display: "&#00FF00Опыт"
-    reward: "&#00FF00опыт"
+    display: "&#00FF00Experience"
+    reward: "&#00FF00experience"

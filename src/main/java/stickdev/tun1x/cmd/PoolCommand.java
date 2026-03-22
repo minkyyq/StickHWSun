@@ -5,11 +5,13 @@ import dev.rollczi.litecommands.annotations.command.Command;
 import dev.rollczi.litecommands.annotations.context.Context;
 import dev.rollczi.litecommands.annotations.execute.Execute;
 import dev.rollczi.litecommands.annotations.permission.Permission;
+import dev.rollczi.litecommands.suggestion.Suggestion;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import stickdev.tun1x.StickHWSun;
+import stickdev.tun1x.lang.LangManager;
 import stickdev.tun1x.model.RewardCycle;
 import stickdev.tun1x.util.TextUtil;
 
@@ -25,55 +27,36 @@ public class PoolCommand {
 
     @Execute(name = "add")
     public void add(@Context Player sender, @Arg String key) {
-        ItemStack hand = sender.getInventory().getItemInMainHand();
+        final ItemStack hand = sender.getInventory().getItemInMainHand();
 
-        if (hand == null || hand.getType() == Material.AIR) {
-            sender.sendMessage(TextUtil.color(plugin.getLangManager().get("commands.add-no-item")));
+        if (hand.getType().isAir()) {
+            sender.sendMessage(LangManager.MESSAGES.addNoItem);
             return;
         }
 
-        String k = key.toLowerCase();
-
-        if (plugin.getLootPool().register(k, hand)) {
-            sender.sendMessage(TextUtil.color(plugin.getLangManager().get("commands.add-success")));
+        if (plugin.getLootPool().register(key.toLowerCase(), hand)) {
+            sender.sendMessage(LangManager.MESSAGES.addSuccess);
         } else {
-            sender.sendMessage(TextUtil.color(plugin.getLangManager().get("commands.add-exists")));
+            sender.sendMessage(LangManager.MESSAGES.addExists);
         }
     }
 
     @Execute(name = "remove")
     public void remove(@Context Player sender, @Arg String key) {
-        String k = key.toLowerCase();
-
-        if (plugin.getLootPool().unregister(k)) {
-            sender.sendMessage(TextUtil.color(plugin.getLangManager().get("commands.remove-success")));
+        if (plugin.getLootPool().unregister(key.toLowerCase())) {
+            sender.sendMessage(LangManager.MESSAGES.removeSuccess);
         }
     }
 
     @Execute(name = "setcycle")
-    public void setCycle(@Context Player sender, @Arg String type) {
-        RewardCycle cycle;
-        
-        if (type.equalsIgnoreCase("money")) {
-            cycle = RewardCycle.MONEY;
-        } else if (type.equalsIgnoreCase("exp")) {
-            cycle = RewardCycle.XP;
-        } else {
+    public void setCycle(@Context Player sender, @Arg RewardCycle cycle) {
+        if (cycle == null) {
+            sender.sendMessage(TextUtil.color("All types: money, exp"));
             return;
         }
 
         plugin.getRewardCycle().setActive(cycle);
-        plugin.getHologramSystem().refresh();
-        sender.sendMessage(TextUtil.color(plugin.getLangManager().get("commands.cycle-changed")));
-    }
-
-    private String extractName(ItemStack stack) {
-        if (stack.hasItemMeta()) {
-            ItemMeta meta = stack.getItemMeta();
-            if (meta != null && meta.hasDisplayName()) {
-                return meta.getDisplayName();
-            }
-        }
-        return stack.getType().name();
+        plugin.getHologramManager().setNewLines();
+        sender.sendMessage(LangManager.MESSAGES.cycleChanged);
     }
 }
